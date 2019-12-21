@@ -65,20 +65,28 @@
     | + | concatenate seqs |
     | * | repeat seqs |
 
-+ format keyword
-    - %s: string 
-    - %c: character
-    - %f: float
-    - %d: decimal
-    - %%: '%' 
++ format keyword  
+    - 
+        |operator|represents|
+        |---|---|
+        | %s | string  |
+        | %c | character |
+        | %f | float |
+        | %d | decimal |
+        | %% | '%'  |
+
+    - ex) print('Type %s %d times' % ('hey', 5))
  
 + escape words
-    - \n: line break
-    - \t: Tab
-    - \ + Enter: line continue
-    - \\: \ 
-    - \':  '
-    - \":  " 
+    - 
+        | operator | represents |
+        |---|---|
+        | \t | Tab |
+        | \\ |  \  |
+        | \' |   ' |
+        | \" |   " | 
+        | \n | line break |
+        | \ + Enter | line continue |
 
 ### 배열 Type
 + List 
@@ -94,11 +102,13 @@
     - format: {'year': 1, 'season': '여름'}
 
 #### 배열원소 참조
-- 시작 인덱스는 0부터 시작하며 - 인덱스는 요소의 끝부터 -1을 시작으로 지정함.
-- [시작 인덱스: 마지막 인덱스]: 시작 index부터 마지막 index-1 부분까지 요소 추출 
-- [: 마지막 인덱스]: 처음부터 마지막 index-1 부분까지 요소 추출 
-- [시작 인덱스:] : 시작 index부터 마지막까지 요소 추출
-- [::2]: step을 2로해서 요소 슬라이싱. 
+- index
+    * starts with 0
+    * reverse ref starts with -1 
+- [from_index: to_index]
+- [: to_index] : from the start
+- [from_index:] : to the end
+- [::step_by]: slice by 
 
 ### 배열 관련 Func
 + len()
@@ -124,9 +134,10 @@
     - and
     - not
 + Indent in block
-    - if block requires indent(2~4spaces)
-    - all indent in if block must have same spaces 
-    - shortcut: 'TAB' <-> 'Shift+TAB'
+    - block requires indent (2~4 spaces)
+    - all indent must have same length 
+    - [TAB] => indent 
+    - [Shift + TAB] => delete indent
   
 ### Loop
 + while
@@ -174,10 +185,124 @@
 
 ## 1-7. Class 선언, 클래스 멤버, 메소드, 인스턴스 멤버 
 
-## 1-8. 메소드의 실습, 생성자, 소멸자, 모듈 분리 
++ Class definition
+    - class name: not related to python file name
+    - naming convetion: starts with upper-case
++ class variable
+    - ref by class name
+    - use static memory 
++ instance variable
+    -  self.field_name 
++ constructor (__init__)
+    - 객체 생성 시 자동실행
+    - 인스턴스 변수 초기화에 이용
+    - 생략가능 
++ destructor (__del__)
+    - 객체 소멸 시 자동실행
+    - 생략가능 
++ class import 
+    - import PKG_NAME.PY_NAME
+    - from PKG_NAME import PY_NAME
+    - from PKG_NAME.PY_NAME import *
+    - from PKG_NAME.PY_NAME import CLASS_NAME
 
-## 1-8. 대용량 데이터 연산 package(library) Numpy 실습 
+## 1-8. Matplotlib library  
++ Overview
+    - data visulaization library 
+    - https://matplotlib.org
++ Links
+    - pyplot API: https://matplotlib.org/api/_as_gen/matplotlib.pyplot.html#module-matplotlib.pyplot
+    - Color: https://matplotlib.org/3.1.0/gallery/color/named_colors.html
+    - Color map: https://matplotlib.org/tutorials/colors/colormaps.html
+    - Line: https://matplotlib.org/gallery/lines_bars_and_markers/linestyles.html
+    - Marker: https://matplotlib.org/api/markers_api.html
 
-## 1-9. 데이터셋 생성 및 분석 package(library) Pandas 
++ Funcs
+    - figure()
+        * figure(figsize=(10, 2))
+        * inch 
+    - plot()
+        * plot(y_list)
+        * plot(x_list, y_list) 
+        * plot(x_list, y_list, color='' ...) 
+    - scatter()
+    - axis()
+        * axis([x_start, y_start_, x_end, y_end]) 
+    - gird()
+        * gird(True) 
+        * gird(False) 
+    - title()
+    - xlabel()
+    - ylabel()
+    - legend() 
+    - show() 
++ plot() args
+    - color
+    - label
+    - linestyle
+    - marker
+    - markerfacecolor
+    - markersize
 
-## 1-10. 데이터 시각화 library Matplotlib(맷플롯립) 
+## 1-9. Numpy Library 
++ Overview
+    -  library to handle math & matrix data
+    -  vecotrized operation => calculate matrix like R
++ tensor
+    - vector
+    - matrix
+    - 3-dimension
+    - 4-dimension 
++ broadcasting
+    - allows to perform operations on arrays of compatible shapes 
+    - create arrays bigger than either of the starting ones
+    - rules: https://docs.scipy.org/doc/numpy/user/basics.broadcasting.html
+    - ref: https://www.oreilly.com/library/view/elegant-scipy/9781491922927/ch01.html
++ ndarray
+    - multi-dimensional array
+    - itme type must be same 
+    - fast access & loop operation
+    - many numpy func returns ndarray as result
+
+### numpy functions
++ NDArray function
+    - np.array()
+        * np.array(list)
+    - np.arange()
+        * np.arange(to) 
+        * np.arange(from, to) 
+        * np.arange(from, to, step_by) 
+    - np.dot()
+        * can operate even row/col does not match 
+        * array1.dot(array2) 
+    - np.matmul()
+    - np.zeros()
+        * np.zeros(rows) 
+        * np.zeros((rows, cols)) 
++ Random Function
+    - random.normal()
+        * random.normal(avg, sigma, num_of_data)
+    - random.rand()
+        * random.rand()
+        * random.rand(rows, cols) 
+    - random.randint()
+        * random.randint(max_int, size=(rows))
+        * random.randint(max_int, size=(rows, cols))
+    - random.randn()
+        * random num in normal distribution
+        * random.rand(from, to)
+    - random.uniform()
+        * random num in uniform distribution
+        * random.uniform(from, to, num_of_data)
+    - random.seed()
+        * random.seed(seed_num) 
+
+## 1-10. 데이터셋 생성 및 분석 package(library) Pandas 
+
+## ETC
++ Built-in Function
+    - https://docs.python.org/ko/3/library/functions.html
++ inspect library  
+: library for extract class/method info   
+    - api: https://docs.python.org/3/library/inspect.html  
+    - example: https://www.journaldev.com/19946/python-inspect-module 
