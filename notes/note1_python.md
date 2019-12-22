@@ -1,14 +1,15 @@
 # 1. Python
 
 ## 1-1. Python is
-+  인터프리터 언어: 라인별로 실행 가능 (java 등 compile 언어는 전체 실행 필수)
++ Interpreter Language
+    - can run by line (compile lang like Java -> run whole code)
 + 구글SW에 50% 이상 
 + 객체지향 & 함수언어 기능
 + 데이터분석 용에 강력 (R은 대규모 데이터 이용 시 결과 달라지는 증상)
 + but, 모바일/브라우저 부재, 버전 호환성, 하드웨어 접근속도 상대적 느림
   
 ## 1-2. Anaconda install 
-+ https://repo.continuum.io/archive/  에서 3.5.1.0 설치
++ https://repo.continuum.io/archive/  (ver. 3.5.1.0)
 +  관리자 권한으로 설치! 
 	- C:\programData 에 설치됨
 + 작업폴더 생성
@@ -66,27 +67,27 @@
     | * | repeat seqs |
 
 + format keyword  
-    - 
-        |operator|represents|
-        |---|---|
-        | %s | string  |
-        | %c | character |
-        | %f | float |
-        | %d | decimal |
-        | %% | '%'  |
 
-    - ex) print('Type %s %d times' % ('hey', 5))
+    |operator|represents|
+    |---|---|
+    | %s | string  |
+    | %c | character |
+    | %f | float |
+    | %d | decimal |
+    | %% | '%'  |
+
+    ex) print('Type %s %d times' % ('hey', 5))
  
 + escape words
-    - 
-        | operator | represents |
-        |---|---|
-        | \t | Tab |
-        | \\ |  \  |
-        | \' |   ' |
-        | \" |   " | 
-        | \n | line break |
-        | \ + Enter | line continue |
+
+    | operator | represents |
+    |---|---|
+    | \t | Tab |
+    | \\ |  \  |
+    | \' |   ' |
+    | \" |   " | 
+    | \n | line break |
+    | \ + Enter | line continue |
 
 ### 배열 Type
 + List 
@@ -149,8 +150,8 @@
 
 ### Defining Functions
 + parameter -> argument
-+ no "Method Overriding" -> 가변인수 사용해 구현 가능
-+ 가변인수
++ no "Method Overriding" -> utilize variable-len-arg instead
++ variable length arguments
     - *actors: pass args in tuple
     - **actors: pass args in dictionary 
 + returns
@@ -180,8 +181,7 @@
    - kernal restart  
    : delete modules on memory
    - %reset  
-   : delete variables only (modules on memory still exist)
-   
+   : delete variables only (modules on memory still exist)   
 
 ## 1-7. Class 선언, 클래스 멤버, 메소드, 인스턴스 멤버 
 
