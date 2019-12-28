@@ -2,18 +2,37 @@
 # 2. 머신러닝 
 
 ## 2-1. 머신러닝 개론
-+ standardlization
 + normalization
+    - $${x_{new} = (x-x_{min}) / (x_{max} - x_{min})}$$
++ standardization
+    - $${x_{new} = (x- \mu) / \sigma}$$
++ learning rate
+    - error updating rate
+    - corr with learning speed (+)
+    - if too large => cannot find min error 
+    - error * (1 - learning_rate) = fianl_error
++ error diff
+    - error diff ~= 0 => stop learning
 
-## 2-2. Conda를 이용한 Python 기반 가상환경 생성 
+## 2-2. Install Conda & Tensorflow
+https://www.tensorflow.org/
 
-### Tensorflow 설치, Keras 설치 
+### Install Tensorflow 2.0 
++ check CPU supports AVX 
+	- https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX 
++ AVX available -> Tensorflow 2.0 설치
+	- pip install tensorflow==2.0.0
++ AVX unavailable -> Tensorflow 1.6 + Keras 2.2 설치
+	- pip install tensorflow==1.6.0
+	- pip install keras==2.2.2
 
-### Jupyter Notebook 개발 환경 구성 
+### Install Conda 
 
-## 2-3. 회귀 분석
+### INstall Jupyter Notebook  
 
-### 선형 회귀(Linear Regression) 
+## 2-3. Regression Analysis
+
+### Linear Regression 
 + equation
     - y = aX + b
 
@@ -29,7 +48,7 @@
 + delta rule
   - update weight  
   - w <- w + αδx
-
++ auto 
 
 ### 다중 선형 회귀(Multiple Linear Regression) 모델 
 + equation
@@ -78,3 +97,9 @@
 ## 2.7 함수형 API 사용과 Parameter 최적화 
 
 
+## ETC
++ numpy 미분 https://pinkwink.kr/1233
++ 자연어 처리 https://wikidocs.net/21667
++ Dive into Deep Learning https://www.d2l.ai/chapter_preface/index.html
++ 큐스터디 권태원 교수님 선형대수 강의
++ dot() vs matmul() https://m.blog.naver.com/PostView.nhn?blogId=cjh226&logNo=221356884894
