@@ -154,9 +154,55 @@ https://www.tensorflow.org/
 
 ### 1차원 데이터의 사용, Keras를 이용한 2차원 데이터의 사용 
 
+### Overfitting Problem
++ Methods https://kolikim.tistory.com/50
++ L1/L2 
+    - https://greatjoy.tistory.com/58
+    - https://towardsdatascience.com/l1-and-l2-regularization-methods-ce25e7fc831c
++ Drop Out
++ Reduce Network
++ Weight Decay Regularization 
+    - L1 (Lasso Regression): regulate by absolute value of weight  
+    - L2 (Ridge Regression) : rebulate by square value of weight
+
+
 ## 2-5. 분류 모델
 
 ### 이항 분류(Binary Classification)
++ LabelEncoder()  
+: convert string category to number group
+    ```
+    from sklearn.preprocessing import LabelEncoder
+
+    e = LabelEncoder() 
+    e.fit(Y_obj)  
+
+    # transform to integer: 0, 1, 2
+    Y = e.transform(Y_obj)  
+    print(Y)
+    ```
++ train_test_split()  
+: split test & validation data randomly
+    ```
+    from sklearn.model_selection import train_test_split
+
+    seed = 0
+
+    # split data => test 85%, validation 15%
+    x_train_all, x_test, y_train_all, y_test = train_test_split(X, Y,
+                                                                stratify=Y,
+                                                                test_size=0.15,
+                                                                random_state=seed)
+    # split test data(85%) => test 90%, validation 10%
+    x_train, x_val, y_train, y_val = train_test_split(x_train_all, y_train_all,
+                                                    stratify=y_train_all,
+                                                    test_size=0.1,
+                                                    random_state=seed)
+    ```
+    - stratify  
+    : makes a split so that the proportion of values in the sample produced will be the same as the proportion of values provided to parameter stratify.  
+
+    For example, if variable y is a binary categorical variable with values 0 and 1 and there are 25% of zeros and 75% of ones, stratify=y will make sure that your random split has 25% of 0's and 75% of 1's.
 
 ### 다중 분류(Multi Classification)
 
