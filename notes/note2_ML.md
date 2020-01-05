@@ -67,10 +67,45 @@ https://www.tensorflow.org/
 + model save/load    
     - model.save('CancerSurvival.h5')
     - load_model('CancerSurvival.h5') 
-### Install Conda 
 
-### INstall Jupyter Notebook  
+### Install Scikit
++ [sklearn API](https://scikit-learn.org/stable/modules/classes.html)
 
+### Install CUDA
++ GPGPU
+    - General Purpose computation on GPU
++ [GPU supports](https://www.tensorflow.org/install/gpu)
++ [Downlaod CUDA](https://developer.nvidia.com/cuda-downloads)
+    - Legacy Releases --> CUDA Toolkit 10.0 (2019.11)
++ [Downlaod CUDA DNN](https://developer.nvidia.com/cudnn)
+    - Tensorflow 1.2: cuDNN 5.1 
+    - Tensorflow 1.3: cuDNN 6  
+    - Tensorflow 2.0+: cuDNN 7.6.2  
++ set system environment variable (Windows)
+    - Path
+        * C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin;
+        * C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\libnvvp;
+        * C:\cuda\bin;
+        * C:\cuda\include;
+        * C:\cuda\lib;
+    - $ echo %Path%
+
+### Create Python Env for GPU  
++ start conda prompt as administrator
++ $ conda env list
++ $ conda create -n machinegpu python=3.6 numpy scipy matplotlib spyder pandas seaborn scikit-learn h5py
+  - numpy: lib for calculating multi-dimension arrays
+  - scipy: lib for sciencific calculation util
+  - - matplotlib: data visualization library
+  - spyder: integrated IDE NumPy, SciPy, Matplotlib, IPython
+  - pandas: lib for data analysis R-like functions & data frame
+  - seaborn: data visualization library based on matplotlib 
+  - scikit-learn: lib for machine learning
+  - h5py: use fileformat hdf5(Hierarchical Data Format version 5) => to save big-data
++ $ activate machinegpu
++ $ conda install tensorflow-gpu==2.0.0
++ $ python -m ipykernel install --user --name=machinegpu
+    - remove: $ jupyter kernelspec uninstall machinegpu
 ## 2-3. Regression Analysis
 
 ### Linear Regression 
@@ -200,15 +235,80 @@ https://www.tensorflow.org/
                                                     random_state=seed)
     ```
     - stratify  
-    : makes a split so that the proportion of values in the sample produced will be the same as the proportion of values provided to parameter stratify.  
-
-    For example, if variable y is a binary categorical variable with values 0 and 1 and there are 25% of zeros and 75% of ones, stratify=y will make sure that your random split has 25% of 0's and 75% of 1's.
+    : makes a split while maintaing the proportion of values in the sample   
+    ex) sample data (0:25%, 1:75%) => train data (0:25%, 1:75%) + test data (0:25%, 1:75%) 
 
 ### 다중 분류(Multi Classification)
++ [IRIS data set](https://archive.ics.uci.edu/ml/datasets/Iris)
++ one-hot-encoding 
+    - n types => n length array (val -> index)
+    - encode sample  
+    ```
+    from sklearn.preprocessing import LabelEncoder 
+    from tensorflow.keras.utils import to_categorical  
+
+    # LabelEncoder
+    # Iris-setosa       0
+    # Iris-versicolor   1
+    # Iris-virginica    2
+    encoder = LabelEncoder()
+    encoder.fit(Y_str)
+    Y = encoder.transform(Y_str)
+
+    # one-hot-encoding 
+    # n types => n length array (val -> index)
+    # Iris-setosa       [1, 0, 0]
+    # Iris-versicolor   [0, 1, 0]
+    # Iris-virginica    [0, 0, 1]
+    Y_encoded = to_categorical(Y) 
+    ```  
+    - decode sample  
+    ```
+    pd = model.predict(x_test)
+
+    # reverse one-hot-encoding 
+    i_cate = np.argmax(pd[i])
+
+    # reverse LabelEncoder
+    category = encoder.inverse_transform(np.array([i_cate]))
+    ``` 
++ soft max function
+    - get probablity of each class
+    - sum of probability = 1
+    - model sample 
+    ```
+    model = Sequential()
+
+    model.add(Dense(64, input_shape=(4, ), activation='relu'))
+    model.add(Dense(32, activation='relu'))
+    model.add(Dense(3, activation='softmax'))
+    ```
 
 ## 2-6. 신경망 모델
 
-### 컨볼루션 신경망 레이어 CNN 모델 개발 
+### 합성곱 신경망 (CNN; Convolusion Neural Network) 
++ reduce pixel var with convolusion mask(=filter=kernel)
++ X_1-n -> convolution(relu) -> convolution2(relu) -> max pooling -> drop out -> flatten -> Y_n -> drop out -> Y(softmax) 
++ Conv2D
+    - model.add(Conv2D(32, kernel_size=(3, 3), padding='valid', input_shape=(30, 30, 1), activation='relu'))  
+    - kernel_size
+    - padding 
+      * valid: 
+      * same: increase marginal block  
+    - input_shape
+      * rows
+      * cols
+      * channels: W/B=1, color=3 
++ max pooing (=sub sampling)
+    - count max value only 
+    - model.add(MaxPooling2D(pool_size=(2, 2)))  => reduce to 25%
++ drop out
+    - remove node => avoid overfitting 
+    - model.add(Dropout(0.25)) => remove 25% of nodes
++ Flatten
+    - compress dimension => vector (row: num_of_filter, col:1)
+    - use right before network end
+    - model.add(Flatten()) 
 
 ### 미국 국립 표준 기술원(NIST)의 MNIST 이용 모델 제작 
 
