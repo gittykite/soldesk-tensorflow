@@ -2,19 +2,23 @@
 
 ## 1-1. Python is
 + Interpreter Language
-    - can run by line (compile lang like Java -> run whole code)
-+ 구글SW에 50% 이상 
-+ 객체지향 & 함수언어 기능
-+ 데이터분석 용에 강력 (R은 대규모 데이터 이용 시 결과 달라지는 증상)
+    - can run by line 
+    - while compile lang must run whole code (ex. Java)
+    - relatively slower 
++ consists Google's SW by 50% 
++ OOP(obejct oriented) 
++ Functional
++ Big Data Analysis
+    - while R results in fluctuant output
 + but, 모바일/브라우저 부재, 버전 호환성, 하드웨어 접근속도 상대적 느림
   
 ## 1-2. Anaconda install 
 + https://repo.continuum.io/archive/  (ver. 3.5.1.0)
-+  관리자 권한으로 설치! 
-	- C:\programData 에 설치됨
-+ 작업폴더 생성
++ Install as **Administrator** (to fix path) 
+	- C:\programData 
++ create working folder
 	- C:\ai_201912\ws_python\notebook
-+ 시스템 환경변수 확인 (Path)
++ check System Environment Variables (Path)
     - C:\ProgramData\Anaconda3;
     - C:\ProgramData\Anaconda3\Library\mingw-w64\bin;
     - C:\ProgramData\Anaconda3\Library\usr\bin;
@@ -30,15 +34,6 @@
 	- conda info --envs 
 	- conda create -n machine python=3.6 numpy scipy matplotlib spyder pandas seaborn scikit-learn h5py
 	- conda activate machine
-
-### Tensorflow 2.0 설치
-+ CPU의 AVX를 지원여부 확인 
-	- https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX 
-+ AVX available -> Tensorflow 2.0 설치
-	- pip install tensorflow==2.0.0
-+ AVX unavailable -> Tensorflow 1.6 + Keras 2.2 설치
-	- pip install tensorflow==1.6.0
-	- pip install keras==2.2.2
 
 ## 1-3. Jupyter Notebook Interpreter의 사용 및 설정 
 + 가상환경에 Jupyter 커널 연동
@@ -296,6 +291,23 @@
         * random.uniform(from, to, num_of_data)
     - random.seed()
         * random.seed(seed_num) 
++ Statistics Func
+    - amin()
+    - amax()
+    - quantile()
+    - median()
+    - average()
+    - mean()
+    - std()
+    - var()
+    - corrcoef()
+    - correlate()
+    - cov()
+    - histogram()
+    - histogram2d()
+    - bincount()
+
+
 
 ## 1-10. 데이터셋 생성 및 분석 package(library) Pandas 
 
