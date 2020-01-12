@@ -96,7 +96,7 @@ https://www.tensorflow.org/
 + $ conda create -n machinegpu python=3.6 numpy scipy matplotlib spyder pandas seaborn scikit-learn h5py
   - numpy: lib for calculating multi-dimension arrays
   - scipy: lib for sciencific calculation util
-  - - matplotlib: data visualization library
+  - matplotlib: data visualization library
   - spyder: integrated IDE NumPy, SciPy, Matplotlib, IPython
   - pandas: lib for data analysis R-like functions & data frame
   - seaborn: data visualization library based on matplotlib 
@@ -106,6 +106,17 @@ https://www.tensorflow.org/
 + $ conda install tensorflow-gpu==2.0.0
 + $ python -m ipykernel install --user --name=machinegpu
     - remove: $ jupyter kernelspec uninstall machinegpu
+
+### Install Pillow & PyCharm
++ install pillow
+  - $ activate machinegpu
+  - $ pip install pillow
++ install crawler lib  
+  - $ conda install scrapy
+  - $ pip install icrawler
++ Download Pycharm (Community)
+  - https://www.jetbrains.com/ko-kr/pycharm/download/other.html
+
 ## 2-3. Regression Analysis
 
 ### Linear Regression 
@@ -309,17 +320,54 @@ https://www.tensorflow.org/
     - compress dimension => vector (row: num_of_filter, col:1)
     - use right before network end
     - model.add(Flatten()) 
++ ImageDataGenerator
+    - use for data augmentation 
+    - flow_from_directory()
+        * target_size: auto img resize to target size
+        * batch_size  
+        * class_mode: categorical / binary / sparse  
+    ````
+    from tensorflow.keras.preprocessing.image import ImageDataGenerator
+    from tensorflow.keras.preprocessing.image import array_to_img
+    from tensorflow.keras.preprocessing.image import img_to_array
+    from tensorflow.keras.preprocessing.image import load_img
 
+    train_datagen = ImageDataGenerator(rescale=1./255)
+    train_generator = train_datagen.flow_from_directory(
+        'warehouse/handwriting_shape/train',
+        target_size=(24, 24),
+        batch_size=3,
+        class_mode='categorical')
+    ``` 
 ### 미국 국립 표준 기술원(NIST)의 MNIST 이용 모델 제작 
 
 ### CIFAR-10, OpenCV를 이용한 이미지 인식 모델 개발 
++ install openCV
+  - pip install opencv-python==3.2.0.6
+  - [download OpenCV haarcascades](https://github.com/opencv/opencv/tree/master/data/haarcascades ) 
+  - [download OpenCV haarcascades(GPU)](https://github.com/opencv/opencv/tree/master/data/haarcascades-cuda ) 
 
-### VGG 학습모델 재사용 
+### CIFAR-10 Image Data
+: labeled images in python list format
+- https://www.cs.toronto.edu/~kriz/cifar.html
+- https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz
 
-### 순환 신경망 레이어 RNN 모델 개발 
+## 순환 신경망 RNN(Recurrent Neural Network) Model
++ use for time-series data
++ cells that feed back
++ activation function: tanh(Hyperbolic tangent)
 
-## 2.7 함수형 API 사용과 Parameter 최적화 
-
+### IMDB Data
+:  review data => binary classification (Positive / Negative)
++ data type
+  - words -> integers 
++ num
+  - train data: 25,000
+  - test data: 25,000
+  - validation data: 5,000
++ loading option
+  - skip_top=20: words to skip with top usage 
+  - num_words=100: num of words to train model
 
 ## ETC
 + numpy 미분 https://pinkwink.kr/1233
@@ -327,3 +375,5 @@ https://www.tensorflow.org/
 + Dive into Deep Learning https://www.d2l.ai/chapter_preface/index.html
 + 큐스터디 권태원 교수님 선형대수 강의
 + dot() vs matmul() https://m.blog.naver.com/PostView.nhn?blogId=cjh226&logNo=221356884894
++ pywintypes36.dll AEBT_ULARGE_INTEGER
++ picpick (freeware) https://picpick.app/ko/
